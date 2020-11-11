@@ -7,21 +7,33 @@ if (!$html)
 	echo "not valid url\n";
 	return;
 }
-// echo $html;
-// return;
-preg_match_all("/([^\"]*[^\"]\.png)/", $html, $matches);
-// print_r($matches);
+
+preg_match_all("/<img(?:[^>]*)src=\"([^\"]*)/", $html, $matches);
+var_dump($matches);
+
+if (!$matches[1])
+{
+	echo "no images found\n";
+	return;
+}
+
 $pattern = "/http:\/\//";
 $dirname = preg_replace($pattern, "", $url);
-$dirname = "asd";
-mkdir($dirname);
-foreach ($matches[1] as $key => $img)
+if (!is_dir($dirname))
+	mkdir($dirname);
+
+$i = 0;
+foreach ($matches[1] as $link)
 {
-	// if (!preg_match("/$dirname/", $img))
-		$img = file_get_contents($url.$img);
-	// else
-		// $img = file_get_contents($img);
-	file_put_contents("./$dirname/$key.png", $img);
+	$img;
+	if ($link[0] == '/')
+		$img = file_get_contents($url.$link);
+	else
+		$img = file_get_contents($link);
+	if ($img)
+		file_put_contents("./$dirname/$i.jpg", $img);
+	$i++;
 }
+// print_r($matches);
 ?>
 
