@@ -1,0 +1,188 @@
+BODY {
+	background: rgb(80, 80, 80);
+}
+
+#title_image {
+	border-radius: 15px;
+	height: 100%;
+	width: auto;
+}
+
+#cluster_image {
+	display: block;
+	max-width: 100%;
+	max-height: 100%;
+	height: 100%;
+	width: auto;
+}
+
+#loupe_img {
+	position: absolute;
+	right: 2%;
+	height: 110%;
+	width: auto;
+	top: 4%;
+}
+
+#reload_img {
+	position: absolute;
+	width: 25px;
+	height: auto;
+	right: 10px;
+	top: 10px;
+}
+
+#close_img {
+	position: absolute;
+	width: 25px;
+	height: auto;
+	right: 10px;
+	bottom: 10px;
+}
+
+#eye_img {
+	border: 5px;
+	border-color: red; 
+	border-style: solid;
+	border-radius: 7px;
+}
+
+#bottom_box {
+	position: relative;
+	top: -120px;
+	left: -3%;
+	border-radius: 15px;
+	background-color: rgb(137, 255, 137);
+	box-shadow: 15px 15px 15px black;
+	width: 600px;
+	height: 200px;
+	grid-area: bottom;
+}
+
+#bot_text_box {
+	overflow: auto;
+	position: relative;
+	background-color: white;
+	width: 450px;
+	height: 25px;
+	top: 5px;
+	left: 10px;
+	border: 3px;
+	border-style: inset;
+}
+
+#bot_button {
+	position: relative;
+	font-size: 15px;
+	width: 100px;
+	height: 28px;
+	top: -25px;
+	left: 80%;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#apple_link {
+	position: absolute;
+	height: 140px;
+	width: 200px;
+	top: 630px;
+	right: 330px;
+}
+
+#ikea_link {
+	position: absolute;
+	height: 220px;
+	width: 120px;
+	top: 630px;
+	left: 660px;
+}
+
+#brick_img {
+	background-image: url("resources/brick.jpg");
+	background-repeat: repeat;
+	background-size: 26.5%;
+	width: 100%;
+	height: 65px;
+}
+
+.text {
+	font-family: Arial, Helvetica, sans-serif;
+	display: inline;
+	font-size: 20px;
+	margin-left: 10px;
+	padding: 0;
+}
+
+.images {
+	position: relative;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	align-content: center;
+	margin-bottom: 15px;
+	width: 65%;
+	height: auto;
+}
+
+.top {
+	position: relative;
+	border-radius: 15px;
+	background: rgb(144, 144, 144);
+	grid-area: top;
+	padding: 15px;
+	box-shadow: 15px 15px 15px black;
+}
+
+.mid {
+	box-shadow: 15px 15px 15px black;
+	background: rgb(144, 144, 144);
+	border-radius: 15px;
+	padding: 2%;
+	grid-area: middle;
+	height: 100%;
+}
+
+.right {
+	box-shadow: 15px 15px 15px black;
+	background: rgb(144, 144, 144);
+	border-radius: 15px;
+	margin: 0 0 0 25%;
+	grid-area: right;
+	height: 70%;
+	padding: 10%;
+}
+
+.left {
+	box-shadow: 15px 15px 15px black;
+	background: rgb(144, 144, 144);
+	border-radius: 15px;
+	margin: 0 25% 0 0;
+	grid-area: left;
+	height: 70%;
+	padding: 10%;
+}
+
+.grid_mid {
+	grid-template-columns: 13% 74% 13%;
+	display: grid;
+	grid-template-areas: 
+		'left middle right';
+	grid-area: mid;
+	margin: 3%;
+	width: auto;
+	height: 85%;
+}
+
+.block {
+	position: relative;
+	margin: 10px auto 0px auto;
+	width: 1632px;
+	height: 918px;
+	display: grid;
+	grid-template-rows: 19% 79% 2%;
+	grid-template-areas: 
+		'top'
+		'mid'
+		'bottom';
+	padding: 30px;
+}

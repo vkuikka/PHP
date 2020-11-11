@@ -1,0 +1,105 @@
+BODY {
+	color: rgb(255, 255, 255);
+	background: grey;
+}
+
+B {
+	position: relative;
+	top: 0.5vmin;
+}
+
+.image {
+	width: 80px;
+	margin: 10px auto;
+	display: block;
+}
+
+.periodic_table {
+	background: darkgrey;
+	width: 89.5vmin;
+	height: 49.5vmin;
+	margin: 2vmin auto 0 auto;
+	display: grid;
+	grid-template-columns: repeat(18, 4.5vmin);
+	grid-template-rows: repeat(9, 4.5vmin);
+	grid-gap: 0.5vmin 0.5vmin;
+	border: 0.5vmin;
+	border-style: solid;
+	border-color: darkgrey;
+}
+
+.number {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	font-size: 0.8vmin;
+}
+
+.weight {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	font-size: 0.8vmin;
+}
+
+.cell {
+	background: grey;
+	color: white;
+	font-size: 1.8vmin;
+	text-align:	center;
+	padding: 0.5vmin;
+}
+
+.cell_yellow {
+	position: relative;
+	background: rgb(216, 219, 0);
+	color: white;
+	font-size: 1.8vmin;
+	text-align:	center;
+	padding: 0.5vmin;
+}
+
+.cell_green {
+	position: relative;
+	background: rgb(56, 163, 56);
+	color: white;
+	font-size: 1.8vmin;
+	text-align:	center;
+	padding: 0.5vmin;
+}
+
+.cell_blue {
+	position: relative;
+	background: rgb(56, 133, 163);
+	color: white;
+	font-size: 1.8vmin;
+	text-align:	center;
+	padding: 0.5vmin;
+}
+
+.cell_red {
+	position: relative;
+	background: rgb(163, 56, 56);
+	color: white;
+	font-size: 1.8vmin;
+	text-align:	center;
+	padding: 0.5vmin;
+}
+
+.cell_purple {
+	position: relative;
+	background: rgb(102, 56, 163);
+	color: white;
+	font-size: 1.8vmin;
+	text-align:	center;
+	padding: 0.5vmin;
+}
+
+.cell_cyan {
+	position: relative;
+	background: rgb(56, 163, 140);
+	color: white;
+	font-size: 1.8vmin;
+	text-align:	center;
+	padding: 0.5vmin;
+}

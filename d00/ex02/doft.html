@@ -1,0 +1,63 @@
+<!-- *********************************************************************** -->
+<!--                                                                         -->
+<!--                                                      :::      ::::::::  -->
+<!-- doft.html                                          :+:      :+:    :+:  -->
+<!--                                                  +:+ +:+         +:+    -->
+<!-- By: vkuikka <vkuikka@student.hive.fi>          +#+  +:+       +#+       -->
+<!--                                              +#+#+#+#+#+   +#+          -->
+<!-- Created: 2020/03/05 21:56:57 by vkuikka           #+#    #+#            -->
+<!-- Updated: 2020/03/05 21:56:59 by vkuikka          ###   ########.fr      -->
+<!--                                                                         -->
+<!-- *********************************************************************** -->
+
+<!DOCTYPE html>
+<HTML>
+	<HEAD>
+		<link href="doft.css" rel="stylesheet" type="text/css">
+		<TITLE>Day of the 42</TITLE>
+	</HEAD>
+	<BODY>
+		<block class="block">
+			<top class="top">
+				<IMG id="title_image" SRC="resources/day_of_the_42.png">
+				<IMG id="loupe_img" SRC="resources/loupe.png">
+				<a HREF="http://www.disney.com">
+					<IMG alt="Start from the beginning" title="Start from the beginning" id="reload_img" SRC="resources/reload.png">
+				</a>
+				<a HREF="http://www.relaischateaux.com">
+					<IMG alt="Disconnect" title="Disconnect" id="close_img" SRC="resources/close.gif">
+				</a>
+			</top>
+			<grid_mid class="grid_mid">
+				<left class="left">
+					<IMG alt="Move" title="Move" class="images" SRC="resources/arrow.png">
+					<IMG alt="Take" title="Take" class="images" SRC="resources/main.png">
+					<IMG alt="Look" title="Look" class="images" id="eye_img" SRC="resources/oeil.png">
+					<IMG alt="Use" title="Use" class="images" SRC="resources/outil.png">
+					<IMG alt="Speak" title="Speak" class="images" SRC="resources/chat-icon.png">
+				</left>
+				<mid class="mid">
+					<IMG id="cluster_image" SRC="resources/cluster.jpg">
+					<a HREF="http://www.ikea.com" id="ikea_link"></a>
+					<a HREF="http:/www.apple.com" id="apple_link"></a>
+				</mid>
+				<right class="right">
+					<IMG alt="book" title="book" class="images" SRC="resources/book.png">
+					<IMG alt="towel" title="towel" class="images" SRC="resources/towel.png">
+					<div alt="brick" title="brick" id="brick_img"></div>
+				</right>
+			</grid_mid>
+			<bottom_box id="bottom_box" style="font-size: 0; padding: 10px;">
+				<text class="text">Vous</text>
+				<text class="text" style="font-size: 50px; font-family:Georgia, 'Times New Roman', Times, serif">entrez</text>
+				<text class="text">alors dans une grande piece remplie</text><BR />
+				<text class="text">d'</text>
+				<text class="text" style="text-shadow: 7px 7px 4.5px red; margin: 0;">ordinateurs</text>
+				<text class="text" style="margin: 0;">...</text><BR />
+				<I class="text">- Bonjour, vous êtes nouveau ici ?</I>
+				<div style="font-size: 20px" id="bot_text_box" contenteditable="true"></div>
+				<button id="bot_button" type="button">Repondre</button>
+			</bottom_box>
+		</block>
+	</BODY>
+</HTML>
