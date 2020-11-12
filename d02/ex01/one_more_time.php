@@ -6,6 +6,28 @@ function replace_accents($str) {
 	return html_entity_decode($str);
 }
 $input = replace_accents($argv[1]);
+$word = explode(" ", $input);
+if (count($word) != 5)
+{
+	echo "Wrong Format\n";
+	return;
+}
+
+for ($i = -1; ++$i < strlen($word[0]);)
+	if ($i != 0 && ord($word[0][$i]) < ord('a') && $word[0][$i])
+	{
+		echo "Wrong Format\n";
+		return;
+	}
+for ($i = -1; ++$i < strlen($word[2]);)
+	if ($i != 0 && ord($word[2][$i]) < ord('a') && $word[2][$i])
+	{
+		echo "Wrong Format\n";
+		return;
+	}
+
+foreach($word as $i => $w)
+	$word[$i] = strtolower($w);
 $input = strtolower($input);
 
 date_default_timezone_set ("europe/paris");
@@ -29,24 +51,48 @@ $days = array('lundi'=>'monday',
 	'samedi'=>'saturday',
 	'dimanche'=>'sunday');
 $input = strtr($input, $months);
+$compare = $input;
 $input = strtr($input, $days);
-$test_nums = explode(" ", $input);
+if ($input == $compare)
+{
+	echo "Wrong Format\n";
+	return;
+}
+
+$no_weekday = explode(" ", $input);
+
+$month = date('m', strtotime($no_weekday[2]));
+if (!checkdate($month, $no_weekday[1], $no_weekday[3]))
+{
+	echo "Wrong format\n";
+	return (0);
+}
+array_shift($no_weekday);
+$no_weekday = array_values($no_weekday);
+$input = implode(" ", $no_weekday);
 $time = strtotime($input);
+if ($time === FALSE)
+{
+	echo "Wrong Format\n";
+	return;
+}
 $valid = 1;
-if ((strlen($test_nums[4]) != 8) || (strlen($test_nums[3]) != 4))
+if (strlen($word[4]) != 8 || strlen($word[3]) != 4)
+{
 	$valid = 0;
-else if ($valid)
-	for ($i = 0; $i < (strlen($test_nums[4])); $i++)
+}
+else
+	for ($i = 0; $i < (strlen($word[4])); $i++)
 	{
 		if ($i == 2 || $i == 5)
 		{
-			if ($test_nums[4][$i] != ':')
+			if ($word[4][$i] != ':')
 				$valid = 0;
 		}
-		else if (!is_numeric($test_nums[4][$i]))
-				$valid = 0;
+		else if (!is_numeric($word[4][$i]))
+			$valid = 0;
 	}
-if (!$time || !$valid)
+if (!$valid)
 	echo "Wrong Format";
 else
 	echo $time;
