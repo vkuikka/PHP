@@ -15,15 +15,12 @@ if (!$matches[1])
 	echo "no images found\n";
 	return;
 }
-
-$pattern = "/http:\/\//";
-$dirname = preg_replace($pattern, "", $url);
-$pattern = "/https:\/\//";
-$dirname = preg_replace($pattern, "", $dirname);
-$dirname = "asd";
+$dirname = preg_replace("/http:\/\//", "", $url);
+$dirname = preg_replace("/https:\/\//", "", $dirname);
+$dirname = preg_replace("/\//", "", $dirname);
 if (!is_dir($dirname))
 {
-	echo "making dir ".$dirname;
+	echo "making dir ".$dirname."\n";
 	mkdir($dirname);
 }
 $i = 0;
