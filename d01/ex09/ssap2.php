@@ -4,6 +4,8 @@ function str_parser($str1, $str2):int
 {
 	$compare1 = 0;
 	$compare2 = 0;
+	$str1 = strtolower($str1);
+	$str2 = strtolower($str2);
 	if (!ctype_alnum($str1[$i]))
 		$compare1 = -1;
 	if (!ctype_alnum($str2[$i]))
