@@ -1,19 +1,19 @@
 <?PHP
-if (!isset($_SESSION["PHP_AUTH_USER"]))
+header('WWW-Authenticate: Basic realm="Member area"');
+header('HTTP/1.0 401 Unauthorized');
+header("X-Frame-Options: none");
+if (!isset($_SERVER[PHP_AUTH_USER]))
 {
-	header('WWW-Authenticate: Basic realm="My Realm"');
-	header('HTTP/1.0 401 Unauthorized');
+	echo "pressed cancel";
 }
-if ($_SESSION["PHP_AUTH_USER"] == "zaz" &&
-	$_SESSIOn["PHP_AUTH_PW"] == "asd")
-	echo "correct";
+else if ($_SERVER[PHP_AUTH_USER] == "zaz" &&
+		$_SERVER[PHP_AUTH_PW] == "Ilovemylittlepony")
+{
+	$image = file_get_contents("../img/42.png");
+	$image = base64_encode($image);
+	echo "<img src='data:image/png;base64,$image'></img>";
+}
 else
-{
-	unset($_SESSION['PHP_AUTH_USER']);
-	unset($_SESSION['PHP_AUTH_PW']);
-	echo "incorrect";
-}
-return;
-$pw = "Ilovemylittleponey";
+	echo "<html><body>That area is accessible for members only</body></html>     ";
 ?>
 
