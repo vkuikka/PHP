@@ -1,8 +1,9 @@
 #!/usr/bin/php
 <?PHP
+if ($argc < 1 || !is_file($argv[1]))
+	return;
 $file = file($argv[1]);
 $str = implode($file);
-
 preg_match_all("/(?i)<a[^>]+>([\s\S]*?)</", $str, $texts);
 preg_match_all("/(?i)<a[^>]+>/", $str, $links);
 foreach ($texts[1] as $key => $value)
