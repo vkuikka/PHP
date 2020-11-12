@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?PHP
-function	ft_is_sort($array)
+function	ft_is_sort($array):bool
 {
 	$cpy = $array;
 	sort($cpy);
