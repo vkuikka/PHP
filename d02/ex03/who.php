@@ -33,21 +33,20 @@ function str_parser($str1, $str2):int
 	return(0);
 }
 function sort_data($arr1, $arr2):int
+{
 	return(str_parser($arr1[device], $arr2[device]));
+}
 
 $path = "/var/run/utmpx";
 $file = fopen($path, "r");
 $i = 0;
-while ($utmpx = fread($file, 628)){
+while ($utmpx = fread($file, 628))
+{
 	$unpack = unpack("a256user/a4initID/a32device/ipid/sut_type/sut_ver/i1entry_time", $utmpx);
 	$array[$i] = $unpack;
 	$i++;
 }
-// var_dump($array);
 usort($array, 'sort_data');
-// echo"\n\n";
-// var_dump($array);
-
 date_default_timezone_set ("europe/Helsinki");
 foreach ($array as $data)
 	if ($data[ut_type] == 7)
