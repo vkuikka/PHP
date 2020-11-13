@@ -10,6 +10,11 @@
 		$data = unserialize(file_get_contents($filename));
 	else
 		mkdir("private");
+	if ($data[$_POST[login]])
+	{
+		echo "ERROR\n";
+		return;
+	}
 	$data[$_POST[login]][login] = $_POST[login];
 	$data[$_POST[login]][passwd] = hash(whirlpool, $_POST[passwd]);
 	file_put_contents($filename, serialize($data));
