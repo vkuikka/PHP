@@ -7,7 +7,7 @@ if ($_GET[submit] == "OK")
 }
 ?>
 <html><body>
-<form methdo="GET">
+<form method="GET">
 	Username: <input name="login" value="<?php if ($_SESSION[login]) echo $_SESSION[login];?>"/>
 	<br/>
 	Password: <input type="password" name="passwd" value="<?php if ($_SESSION[passwd]) echo $_SESSION[passwd];?>"/>
