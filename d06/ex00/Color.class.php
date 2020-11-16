@@ -1,34 +1,22 @@
 <?php
-	require "../ex00/Color.class.php";
-	class test {
-	}
-
-	class vertex {
-		public $x;
-		public $y;
-		public $z;
-		public $w;
-		public $color;
+	class Color {
+		public $red;
+		public $green;
+		public $blue;
 		static $verbose = false;
 
-		function __construct(array $coords){
-			$this->$color = new Color;
-
-			$this->x = $coords[0];
-			$this->y = $coords[1];
-			$this->z = $coords[2];
-			$this->w = $coords[3];
-			if ($this->verbose === TRUE)
-				echo "construct\n";
+		function __construct(array $colors){
+			$this->red = $colors[0];
+			$this->green = $colors[1];
+			$this->blue = $colors[2];
+			echo "construct\n";
 		}
 		function __destruct(){
-			if ($this->verbose === TRUE)
-				echo "destruct\n";
+			echo "destruct\n";
 		}
 		function __toString():string{
 			return "tostring\n";
 		}
-
 		static function doc(){
 			echo "documentation\n";
 		}
@@ -54,7 +42,7 @@
 			return $new;
 		}
 	}
-	$arr = [1, 2, 3, 4];
+	$arr = [1, 2, 3];
 	$obj = new Color($arr);
 
 	var_dump($obj->blue);
@@ -65,4 +53,5 @@
 	// var_dump($new);
 
 
+	return;
 ?>
