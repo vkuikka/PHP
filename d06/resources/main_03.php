@@ -28,7 +28,6 @@ $vtx = new Vertex( array( 'x' => 20.0, 'y' => 20.0, 'z' => 0.0 ) );
 $vtc = new Vector( array( 'dest' => $vtx ) );
 $T  = new Matrix( array( 'preset' => Matrix::TRANSLATION, 'vtc' => $vtc ) );
 print( $T . PHP_EOL . PHP_EOL );
-return ;
 
 print( 'A scale matrix is no big deal.' . PHP_EOL );
 $S  = new Matrix( array( 'preset' => Matrix::SCALE, 'scale' => 10.0 ) );
@@ -54,6 +53,7 @@ $P = new Matrix( array( 'preset' => Matrix::PROJECTION,
 						'near' => 1.0,
 						'far' => -50.0 ) );
 print( $P . PHP_EOL . PHP_EOL );
+return ;
 
 print( 'Matrices are so awesome, that they can be combined !' . PHP_EOL );
 print( 'This is a model matrix that scales, then rotates around OY axis,' . PHP_EOL );
