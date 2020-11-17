@@ -1,68 +1,79 @@
 <?php
-	require "../ex00/Color.class.php";
-	class test {
-	}
+	require_once "../ex00/Color.class.php";
 
-	class vertex {
+	class Vertex {
 		public $x;
 		public $y;
 		public $z;
-		public $w;
-		public $color;
+		public $col;
+		public $w = 1;
+
 		static $verbose = false;
 
-		function __construct(array $coords){
-			$this->$color = new Color;
-
-			$this->x = $coords[0];
-			$this->y = $coords[1];
-			$this->z = $coords[2];
-			$this->w = $coords[3];
-			if ($this->verbose === TRUE)
-				echo "construct\n";
+		function __construct(array $vertex){
+			if (isset($vertex['color']))
+				$this->col = $vertex['color'];
+			else
+				$this->col = new Color( array('red' => 255, 'green' => 255, 'blue' => 255));
+			if (isset($vertex['x']) &&
+				isset($vertex['y']) &&
+				isset($vertex['z']))
+			{
+				$this->x = $vertex['x'];
+				$this->y = $vertex['y'];
+				$this->z = $vertex['z'];
+			}
+			if (self::$verbose == true)
+			{
+				printf("Vertex( x: %.2f, y: %.2f, z: %.2f, w: %.2f, ",
+							$this->x, $this->y, $this->z, $this->w);
+				print $this->col." ) constructed\n";
+			}
 		}
 		function __destruct(){
-			if ($this->verbose === TRUE)
-				echo "destruct\n";
+			if (self::$verbose == true)
+			{
+				printf("Vertex( x: %.2f, y: %.2f, z: %.2f, w: %.2f, ",
+						$this->x, $this->y, $this->z, $this->w);
+				print $this->col." ) destructed\n";
+			}
 		}
 		function __toString():string{
-			return "tostring\n";
+			$str = sprintf("Vertex( x: %.2f, y: %.2f, z: %.2f, w: %.2f",
+						$this->x, $this->y, $this->z, $this->w);
+			if (self::$verbose === true)
+				$str = $str.", ".$this->col;
+			$str .= " )";
+			return $str;
+		}
+		static function doc(){
+			if (file_exists("Vertex.doc.txt"))
+				echo file_get_contents("Vertex.doc.txt");
 		}
 
-		static function doc(){
-			echo "documentation\n";
-		}
 		function add(Color $other):Color{
-			$new = new Color(array(0, 0, 0));
-			$new->red = $this->red + $other->red;
-			$new->green = $this->green + $other->green;
-			$new->blue = $this->blue + $other->blue;
-			return $new;
+			$new['x'] = $this->x + $other->x;
+			$new['y'] = $this->y + $other->y;
+			$new['z'] = $this->z + $other->z;
+			$new['w'] = $this->w + $other->w;
+			$res = new Vertex($new);
+			return $res;
 		}
 		function sub(Color $other):Color{
-			$new = new Color(array(0, 0, 0));
-			$new->red = $this->red - $other->red;
-			$new->green = $this->green - $other->green;
-			$new->blue = $this->blue - $other->blue;
-			return $new;
+			$new['x'] = $this->x - $other->x;
+			$new['y'] = $this->y - $other->y;
+			$new['z'] = $this->z - $other->z;
+			$new['w'] = $this->w - $other->w;
+			$res = new Vertex($new);
+			return $res;
 		}
-		function mult(Color $other):Color{
-			$new = new Color(array(0, 0, 0));
-			$new->red = $this->red * $other->red;
-			$new->green = $this->green * $other->green;
-			$new->blue = $this->blue * $other->blue;
-			return $new;
+		function mult(int $mult):Color{
+			$new['x'] = $this->x * $mult;
+			$new['y'] = $this->y - $mult;
+			$new['z'] = $this->z - $mult;
+			$new['w'] = $this->w - $mult;
+			$res = new Vertex($new);
+			return $res;
 		}
 	}
-	$arr = [1, 2, 3, 4];
-	$obj = new Color($arr);
-
-	var_dump($obj->blue);
-	$new = $obj->add($obj);
-	$new = $new->sub($obj);
-
-	// var_dump($obj->blue);
-	// var_dump($new);
-
-
 ?>
