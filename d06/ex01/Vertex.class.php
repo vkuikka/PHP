@@ -10,6 +10,11 @@
 
 		static $verbose = false;
 
+
+		public function getX(){return $this->$x;}
+		public function getY(){return $this->$y;}
+		public function getZ(){return $this->$z;}
+		public function getW(){return $this->$w;}
 		function __construct(array $vertex){
 			if (isset($vertex['color']))
 				$this->col = $vertex['color'];
@@ -41,7 +46,7 @@
 		function __toString():string{
 			$str = sprintf("Vertex( x: %.2f, y: %.2f, z: %.2f, w: %.2f",
 						$this->x, $this->y, $this->z, $this->w);
-			if (self::$verbose === true)
+			if (self::$verbose === true && isset($this->col))
 				$str = $str.", ".$this->col;
 			$str .= " )";
 			return $str;
