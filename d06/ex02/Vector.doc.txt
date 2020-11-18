@@ -3,10 +3,10 @@
 The Vector class handles a homogenous 3d vector.
 
 An instance can be constructed from a vertex by giving it a destination:
-new Vector(array('dest' => $Your_vertex));
+new Vector(array('dest' => $dest_vertex));
 
 Or by giving a destination AND an origin vertex
-new Vector(array('dest' => $Your_dest_vertex, 'orig' => $You_orig_vertex));
+new Vector(array('dest' => $dest_vertex, 'orig' => $orig_vertex));
 
 If orig value is not given in the array like above,
 the default values will be 0 for all except w value will be 1.
