@@ -1,5 +1,5 @@
 <?php
-require "../ex00/Tyrion.class.php"
+require_once "Tyrion.class.php";
 
 class Lannister {
 	public function __construct() {
@@ -13,7 +13,6 @@ class Lannister {
 	}
 }
 
-include('Tyrion.class.php');
 
 $tyrion = new Tyrion();
 
