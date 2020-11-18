@@ -11,7 +11,7 @@
 		const TRANSLATION = "TR";
 		const PROJECTION = "PR";
 
-		public $matrix = array();
+		private $matrix = array();
 
 		static $verbose = false;
 
