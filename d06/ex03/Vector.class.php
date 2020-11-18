@@ -54,7 +54,7 @@
 		}
 		static function doc(){
 			if (file_exists("Vector.doc.txt"))
-				echo file_get_contents("Vector.doc.txt");
+				return file_get_contents("Vector.doc.txt");
 		}
 		function magnitude():float{
 			return (sqrt($this->_x**2 + $this->_y**2 + $this->_z**2));

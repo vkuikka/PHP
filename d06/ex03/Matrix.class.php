@@ -102,7 +102,7 @@ w | ".sprintf("%.2f", $m[0][3])." | ".sprintf("%.2f", $m[1][3])." | ".sprintf("%
 		}
 		static function doc(){
 			if (file_exists("Vector.doc.txt"))
-				echo file_get_contents("Vector.doc.txt");
+				return file_get_contents("Vector.doc.txt");
 		}
 		function magnitude():float{
 			return (sqrt($this->getX()**2 + $this->getY()**2 + $this->getZ()**2));

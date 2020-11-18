@@ -11,7 +11,7 @@
 		const TRANSLATION = "TR";
 		const PROJECTION = "PR";
 
-		private $matrix = array();
+		public $matrix = array();
 
 		static $verbose = false;
 
@@ -20,24 +20,22 @@
 		public function getvZ(){return $this->__vtcZ;}
 
 		function __construct(array $arr){
-			// if ((isset($vector['preset']) == SCALE &&
-			// 	!isset($vector['scale'])) ||
-
-			// 	((isset($vector['preset']) == RX ||
-			// 	isset($vector['preset']) == RY ||
-			// 	isset($vector['preset']) == RZ) &&
-			// 	!isset($vector['angle'])) ||
-
-			// 	((isset($vector['preset']) == TRANSLATION) &&
-			// 	!isset($vector['vtc'])) ||
-
-			// 	((isset($vector['preset']) == PROJECTION) &&
-			// 	(!isset($vector['fov']) ||
-			// 	!isset($vector['ratio']) ||
-			// 	!isset($vector['near']) ||
-			// 	!isset($vector['far']))))
+			// if ((isset($arr['preset']) == SCALE &&
+			// 	!isset($arr['scale'])) ||
+			// 	((isset($arr['preset']) == RX ||
+			// 	isset($arr['preset']) == RY ||
+			// 	isset($arr['preset']) == RZ) &&
+			// 	!isset($arr['angle'])) ||
+			// 	((isset($arr['preset']) == TRANSLATION) &&
+			// 	!isset($arr['vtc'])) ||
+			// 	((isset($arr['preset']) == PROJECTION) &&
+			// 	(!isset($arr['fov']) ||
+			// 	!isset($arr['ratio']) ||
+			// 	!isset($arr['near']) ||
+			// 	!isset($arr['far']))))
 			// {
-			// 	echo "ERROR";
+			// 	echo "ERROR: incorrect preset with values given\n";
+			// 	var_dump($arr);
 			// 	exit;
 			// }
 			if ($arr['preset'] == self::IDENTITY)
@@ -122,7 +120,7 @@ w | ".sprintf("%.2f", $m[0][3])." | ".sprintf("%.2f", $m[1][3])." | ".sprintf("%
 		}
 		static function doc(){
 			if (file_exists("Vector.doc.txt"))
-				echo file_get_contents("Vector.doc.txt");
+				return file_get_contents("Vector.doc.txt");
 		}
 		function magnitude():float{
 			return (sqrt($this->getX()**2 + $this->getY()**2 + $this->getZ()**2));
@@ -155,6 +153,19 @@ w | ".sprintf("%.2f", $m[0][3])." | ".sprintf("%.2f", $m[1][3])." | ".sprintf("%
 			$tmp['z'] = ($vx * $m[0][2]) + ($vy * $m[1][2]) + ($vz * $m[2][2]) + ($vw * $m[3][2]);
 			$tmp['w'] = ($vx * $m[0][3]) + ($vy * $m[1][3]) + ($vz * $m[2][3]) + ($vw * $m[3][3]);
 			$res = new Vertex($tmp);
+			return $res;
+		}
+		function rot():Matrix{
+			$res = new Matrix(array());
+			$res->matrix = $this->matrix;
+			$res->matrix[2][2] = $this->matrix[0][0];
+			$res->matrix[0][0] = $this->matrix[2][2];
+			$res->matrix[1][0] = $this->matrix[1][2];
+			$res->matrix[1][2] = $this->matrix[1][0];
+			$res->matrix[2][0] = $this->matrix[0][2];
+			$res->matrix[0][2] = $this->matrix[2][0];
+			$res->matrix[0][1] = $this->matrix[2][1];
+			$res->matrix[2][1] = $this->matrix[0][1];
 			return $res;
 		}
 	}

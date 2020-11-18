@@ -2,7 +2,7 @@
 <- Vertex ----------------------------------------------------------------------
 The Vertex class handles homogenous 3d coordinates.
 
-An instance can be contructed from x, y and z coordinates:
+An instance can be constructed from x, y and z coordinates:
 new Vertex( array( 'x' => 1.0, 'y' => 0.0, 'z' => 0.0) );
 
 If w value is not given in the array like above, the default value will be 1.0;

@@ -57,7 +57,7 @@
 		}
 		static function doc(){
 			if (file_exists("Vertex.doc.txt"))
-				echo file_get_contents("Vertex.doc.txt");
+				return file_get_contents("Vertex.doc.txt");
 		}
 
 		function add(Color $other):Color{

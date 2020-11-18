@@ -2,7 +2,7 @@
 <- Color ----------------------------------------------------------------------
 The Color class handles RGB colors.
 
-An instance can be contructed from either a RGB value:
+An instance can be constructed from either a RGB value:
 new Color( array( 'rgb' => 12345 ) );
 
 Or from distinct red, green, blue constitutives:

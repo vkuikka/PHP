@@ -1,6 +1,6 @@
 
-<- Color ----------------------------------------------------------------------
-The Color class handles RGB colors.
+<- Camera ----------------------------------------------------------------------
+The Camera class handles matricies needed to start rendering image.
 
 An instance can be constructed from either a RGB value:
 new Color( array( 'rgb' => 12345 ) );

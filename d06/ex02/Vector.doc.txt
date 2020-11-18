@@ -2,7 +2,7 @@
 <- Vector ----------------------------------------------------------------------
 The Vector class handles a homogenous 3d vector.
 
-An instance can be contructed from a vertex by giving it a destination:
+An instance can be constructed from a vertex by giving it a destination:
 new Vector(array('dest' => $Your_vertex));
 
 Or by giving a destination AND an origin vertex

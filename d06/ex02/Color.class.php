@@ -38,7 +38,7 @@
 		}
 		static function doc(){
 			if (file_exists("Color.doc.txt"))
-				echo file_get_contents("Color.doc.txt");
+				return file_get_contents("Color.doc.txt");
 		}
 		function add(Color $other):Color{
 			$new['red'] = $this->red + $other->red;
