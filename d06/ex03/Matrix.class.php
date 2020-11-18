@@ -10,13 +10,8 @@
 		const RZ = "RZ";
 		const TRANSLATION = "TR";
 		const PROJECTION = "PR";
-		const FOV = 90;
-		const ASP = 16;
 
-		private $__vtcX;
-		private $__vtcY;
-		private $__vtcZ;
-		private $__vtx0;
+		private $matrix = array();
 
 		static $verbose = false;
 
@@ -25,160 +20,113 @@
 		public function getvZ(){return $this->__vtcZ;}
 
 		function __construct(array $arr){
-			if ((isset($vector['preset']) == SCALE &&
-				!isset($vector['scale'])) ||
+			// if ((isset($vector['preset']) == SCALE &&
+			// 	!isset($vector['scale'])) ||
 
-				((isset($vector['preset']) == RX ||
-				isset($vector['preset']) == RY ||
-				isset($vector['preset']) == RZ) &&
-				!isset($vector['angle'])) ||
+			// 	((isset($vector['preset']) == RX ||
+			// 	isset($vector['preset']) == RY ||
+			// 	isset($vector['preset']) == RZ) &&
+			// 	!isset($vector['angle'])) ||
 
-				((isset($vector['preset']) == TRANSLATION) &&
-				!isset($vector['vtc'])) ||
+			// 	((isset($vector['preset']) == TRANSLATION) &&
+			// 	!isset($vector['vtc'])) ||
 
-				((isset($vector['preset']) == PROJECTION) &&
-				(!isset($vector['fov']) ||
-				!isset($vector['ratio']) ||
-				!isset($vector['near']) ||
-				!isset($vector['far']))))
-			{
-				echo "ERROR";
-				exit;
-			}
-
+			// 	((isset($vector['preset']) == PROJECTION) &&
+			// 	(!isset($vector['fov']) ||
+			// 	!isset($vector['ratio']) ||
+			// 	!isset($vector['near']) ||
+			// 	!isset($vector['far']))))
+			// {
+			// 	echo "ERROR";
+			// 	exit;
+			// }
 			if ($arr['preset'] == self::IDENTITY)
 			{
-				$vx['dest'] = new Vertex(array('x' => 1, 'y' => 0, 'z' => 0, 'w' => 0));
-				$this->__vtcX = new Vector($vx);
-				$vy['dest'] = new Vertex(array('x' => 0, 'y' => 1, 'z' => 0, 'w' => 0));
-				$this->__vtcY = new Vector($vy);
-				$vz['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 1, 'w' => 0));
-				$this->__vtcZ = new Vector($vz);
-				$v0['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 0, 'w' => 1));
-				$this->__vtx0 = new Vector($v0);
+				$this->matrix[0] = [1, 0, 0, 0];
+				$this->matrix[1] = [0, 1, 0, 0];
+				$this->matrix[2] = [0, 0, 1, 0];
+				$this->matrix[3] = [0, 0, 0, 1];
 				echo "Matrix IDENTITY instance constructed\n";
 			}
 			if ($arr['preset'] == self::SCALE && isset($arr['scale']))
 			{
-				$vx['dest'] = new Vertex(array('x' => $arr['scale'], 'y' => 0, 'z' => 0, 'w' => 0));
-				$this->__vtcX = new Vector($vx);
-				$vy['dest'] = new Vertex(array('x' => 0, 'y' => $arr['scale'], 'z' => 0, 'w' => 0));
-				$this->__vtcY = new Vector($vy);
-				$vz['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => $arr['scale'], 'w' => 0));
-				$this->__vtcZ = new Vector($vz);
-				$v0['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 0, 'w' => 1));
-				$this->__vtx0 = new Vector($v0);
+				$s = $arr['scale'];
+				$this->matrix[0] = [$s,	0,	0,	0];
+				$this->matrix[1] = [0,	$s,	0,	0];
+				$this->matrix[2] = [0,	0,	$s,	0];
+				$this->matrix[3] = [0,	0,	0,	1];
 				echo "Matrix SCALE instance constructed\n";
 			}
 			if ($arr['preset'] == self::RX && isset($arr['angle']))
 			{
-				$vx['dest'] = new Vertex(array('x' => 1, 'y' => 0, 'z' => 0, 'w' => 0));
-				$this->__vtcX = new Vector($vx);
-				$vy['dest'] = new Vertex(array('x' => 0, 'y' => cos($arr['angle']), 'z' => sin($arr['angle']), 'w' => 0));
-				$this->__vtcY = new Vector($vy);
-				$vz['dest'] = new Vertex(array('x' => 0, 'y' => -sin($arr['angle']), 'z' => cos($arr['angle']), 'w' => 0));
-				$this->__vtcZ = new Vector($vz);
-				$v0['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 0, 'w' => 1));
-				$this->__vtx0 = new Vector($v0);
+				$c = cos($arr['angle']);
+				$s = sin($arr['angle']);
+				$this->matrix[0] = [1,	0,	0,	0];
+				$this->matrix[1] = [0,	$c,	$s,	0];
+				$this->matrix[2] = [0,	-$s,$c,	0];
+				$this->matrix[3] = [0,	0,	0,	1];
 				echo "Matrix Ox ROTATION instance constructed\n";
 			}
 			if ($arr['preset'] == self::RY && isset($arr['angle']))
 			{
-				$vx['dest'] = new Vertex(array('x' => cos($arr['angle']), 'y' => 0, 'z' => -sin($arr['angle']), 'w' => 0));
-				$this->__vtcX = new Vector($vx);
-				$vy['dest'] = new Vertex(array('x' => 0, 'y' => 1, 'z' => 0, 'w' => 0));
-				$this->__vtcY = new Vector($vy);
-				$vz['dest'] = new Vertex(array('x' => sin($arr['angle']), 'y' => 0, 'z' => cos($arr['angle']), 'w' => 0));
-				$this->__vtcZ = new Vector($vz);
-				$v0['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 0, 'w' => 1));
-				$this->__vtx0 = new Vector($v0);
+				$c = cos($arr['angle']);
+				$s = sin($arr['angle']);
+				$this->matrix[0] = [$c,	0,	-$s,0];
+				$this->matrix[1] = [0,	1,	0,	0];
+				$this->matrix[2] = [$s,	0,	$c,	0];
+				$this->matrix[3] = [0,	0,	0,	1];
 				echo "Matrix Oy ROTATION instance constructed\n";
 			}
 			if ($arr['preset'] == self::RZ && isset($arr['angle']))
 			{
-				$vx['dest'] = new Vertex(array('x' => cos($arr['angle']), 'y' => sin($arr['angle']), 'z' => 0, 'w' => 0));
-				$this->__vtcX = new Vector($vx);
-				$vy['dest'] = new Vertex(array('x' => -sin($arr['angle']), 'y' => cos($arr['angle']), 'z' => 0, 'w' => 0));
-				$this->__vtcY = new Vector($vy);
-				$vz['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 1, 'w' => 0));
-				$this->__vtcZ = new Vector($vz);
-				$v0['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 0, 'w' => 1));
-				$this->__vtx0 = new Vector($v0);
+				$c = cos($arr['angle']);
+				$s = sin($arr['angle']);
+				$this->matrix[0] = [$c,	$s,	0,	0];
+				$this->matrix[1] = [-$s,$c,	0,	0];
+				$this->matrix[2] = [0,	0,	1,	0];
+				$this->matrix[3] = [0,	0,	0,	1];
 				echo "Matrix Oz ROTATION instance constructed\n";
 			}
 			if ($arr['preset'] == self::TRANSLATION && isset($arr['vtc']))
 			{
-				$vtc = $arr['vtc'];
-				// $vx['dest'] = new Vertex(array('x' => 1, 'y' => 0, 'z' => 0, 'w' => $vtc->getX()));
-				// $this->__vtcX = new Vector($vx);
-				// $vy['dest'] = new Vertex(array('x' => 0, 'y' => 1, 'z' => 0, 'w' => $vtc->getY()));
-				// $this->__vtcY = new Vector($vy);
-				// $vz['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 1, 'w' => $vtc->getZ()));
-				// $this->__vtcZ = new Vector($vz);
-				// $v0['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 0, 'w' => $vtc->getW()));
-				// $this->__vtx0 = new Vector($v0);
-
-				$vx['dest'] = new Vertex(array('x' => 1, 'y' => 0, 'z' => 0, 'w' => 0));
-				$this->__vtcX = new Vector($vx);
-				$vy['dest'] = new Vertex(array('x' => 0, 'y' => 1, 'z' => 0, 'w' => 0));
-				$this->__vtcY = new Vector($vy);
-				$vz['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 1, 'w' => 0));
-				$this->__vtcZ = new Vector($vz);
-				$v0['dest'] = new Vertex(array('x' => $vtc->getX(), 'y' => $vtc->getY(), 'z' => $vtc->getZ(), 'w' => $vtc->getW()));
-				$this->__vtx0 = new Vector($v0);
+				$v = $arr['vtc'];
+				$this->matrix[0] = [1,	0,	0,	0];
+				$this->matrix[1] = [0,	1,	0,	0];
+				$this->matrix[2] = [0,	0,	1,	0];
+				$this->matrix[3] = [$v->getX(),	$v->getY(),	$v->getZ(),	$v->getW()];
+				// $this->matrix[0] = [1,	0,	0,	$v->getX()];
+				// $this->matrix[1] = [0,	1,	0,	$v->getY()];
+				// $this->matrix[2] = [0,	0,	1,	$v->getZ()];
+				// $this->matrix[3] = [0,	0,	0,	$v->getW()];
 				echo "Matrix TRANSLATION instance constructed\n";
 			}
 			if ($arr['preset'] == self::PROJECTION && isset($arr['ratio']))
 			{
-
+				$this->matrix[1][1] = 1 / tan(0.5 * deg2rad($arr['fov']));
+				$this->matrix[0][0] = $this->matrix[1][1] / $arr['ratio'];
+				$this->matrix[2][2] = -1 * ((float)-$arr['near'] - (float)$arr['far']) / (float)($arr['near'] - (float)$arr['far']);
+				$this->matrix[2][3] = -1;
+				$this->matrix[3][2] = (2 * (float)$arr['near'] * (float)$arr['far']) / (float)($arr['near'] - (float)$arr['far']);
+				$this->matrix[3][3] = 0;
+				echo "Matrix PROJECTION instance constructed\n";
 			}
 		}
-		private function frustum($n){
-			$scale = tan(FOV * 0.5 * M_PI / 180) * $n;
-			$r = ASP * $scale;
-			$l = -$r;
-			$t = $scale;
-			$b = -$scale;
-
-		    M[0][0] = 2 * $n / ($r - $l); 
-			M[0][1] = 0; 
-			M[0][2] = 0; 
-			M[0][3] = 0; 
-		
-			M[1][0] = 0; 
-			M[1][1] = 2 * n / (t - b); 
-			M[1][2] = 0; 
-			M[1][3] = 0; 
-		
-			M[2][0] = (r + l) / (r - l); 
-			M[2][1] = (t + b) / (t - b); 
-			M[2][2] = -(f + n) / (f - n); 
-			M[2][3] = -1; 
-		
-			M[3][0] = 0; 
-			M[3][1] = 0; 
-			M[3][2] = -2 * f * n / (f - n); 
-			M[3][3] = 0; 	
-		}
 		function __toString():string{
-			$vx = $this->__vtcX;
-			$vy = $this->__vtcY;
-			$vz = $this->__vtcZ;
-			$vw = $this->__vtx0;
+			$m = $this->matrix;
 			return("M | vtcX | vtcY | vtcZ | vtxO
 -----------------------------
-x | ".sprintf("%.2f", $vx->getX())." | ".sprintf("%.2f", $vy->getX())." | ".sprintf("%.2f", $vz->getX())." | ".sprintf("%.2f", $vw->getX())."
-y | ".sprintf("%.2f", $vx->getY())." | ".sprintf("%.2f", $vy->getY())." | ".sprintf("%.2f", $vz->getY())." | ".sprintf("%.2f", $vw->getY())."
-z | ".sprintf("%.2f", $vx->getZ())." | ".sprintf("%.2f", $vy->getZ())." | ".sprintf("%.2f", $vz->getZ())." | ".sprintf("%.2f", $vw->getZ())."
-w | ".sprintf("%.2f", $vx->getW())." | ".sprintf("%.2f", $vy->getW())." | ".sprintf("%.2f", $vz->getW())." | ".sprintf("%.2f", $vw->getW()));
+x | ".sprintf("%.2f", $m[0][0])." | ".sprintf("%.2f", $m[1][0])." | ".sprintf("%.2f", $m[2][0])." | ".sprintf("%.2f", $m[3][0])."
+y | ".sprintf("%.2f", $m[0][1])." | ".sprintf("%.2f", $m[1][1])." | ".sprintf("%.2f", $m[2][1])." | ".sprintf("%.2f", $m[3][1])."
+z | ".sprintf("%.2f", $m[0][2])." | ".sprintf("%.2f", $m[1][2])." | ".sprintf("%.2f", $m[2][2])." | ".sprintf("%.2f", $m[3][2])."
+w | ".sprintf("%.2f", $m[0][3])." | ".sprintf("%.2f", $m[1][3])." | ".sprintf("%.2f", $m[2][3])." | ".sprintf("%.2f", $m[3][3]));
 		}
 		function __destruct(){
 			if (self::$verbose == true)
 			{
-				printf("Vector( x: %.2f, y: %.2f, z: %.2f, w: %.2f",
-						$this->__x, $this->__y, $this->__z, $this->__w);
-				if (isset($this->col))
-					print ", ".$this->col;
+				// printf("Vector( x: %.2f, y: %.2f, z: %.2f, w: %.2f",
+				// 		$this->__x, $this->__y, $this->__z, $this->__w);
+				// if (isset($this->col))
+				// 	print ", ".$this->col;
 				print " ) destructed\n";
 			}
 		}
@@ -191,23 +139,32 @@ w | ".sprintf("%.2f", $vx->getW())." | ".sprintf("%.2f", $vy->getW())." | ".spri
 		}
 
 		function mult(Matrix $rhs):Matrix{
-			$res = new Matrix(
-				new Vector(array(0, 0, 0, 0)),
-				new Vector(array(0, 0, 0, 0)),
-				new Vector(array(0, 0, 0, 0)),
-				new Vector(array(0, 0, 0, 0))
-			);
-
-
-
-			$x = $this->getY() * $rhs->getZ() - $rhs->getY() * $this->getZ();
-			$y = $this->getZ() * $rhs->getX() - $rhs->getZ() * $this->getX();
-			$z = $this->getX() * $rhs->getY() - $rhs->getX() * $this->getY();
-			$new = new Vertex(array('x' => $x, 'y' => $y, 'z' => $z));
-			$new = new Vector(array('dest' => $new));
-			return ($new);
+            $res = new Matrix(array());
+			for ($i = 0; $i < 4; $i++) {
+				for ($j = 0; $j < 4; $j++) {
+					$res->matrix[$i][$j] = 0;
+					$res->matrix[$i][$j] += $this->matrix[0][$j] * $rhs->matrix[$i][0];
+					$res->matrix[$i][$j] += $this->matrix[1][$j] * $rhs->matrix[$i][1];
+					$res->matrix[$i][$j] += $this->matrix[2][$j] * $rhs->matrix[$i][2];
+					$res->matrix[$i][$j] += $this->matrix[3][$j] * $rhs->matrix[$i][3];
+				}
+			}
+			return $res;
 		}
-		// function transformVertex(Vector $vtx):Vector{
+		function transformVertex(Vertex $vtx):Vertex{
+			$tmp = array();
+			$m = $this->matrix;
+			$vx = $vtx->getX();
+			$vy = $vty->getY();
+			$vz = $vtz->getZ();
+			$vw = $vtz->getW();
+			$tmp['x'] = ($vx * $m[0][0]) + ($vy * $m[0][1]) + ($vz * $m[0][2]) + ($vw * $m[0][3]);
+			$tmp['y'] = ($vx * $m[1][0]) + ($vy * $m[1][1]) + ($vz * $m[1][2]) + ($vw * $m[1][3]);
+			$tmp['z'] = ($vx * $m[2][0]) + ($vy * $m[2][1]) + ($vz * $m[2][2]) + ($vw * $m[2][3]);
+			$tmp['w'] = ($vx * $m[3][0]) + ($vy * $m[3][1]) + ($vz * $m[3][2]) + ($vw * $m[3][3]);
+            $res = new Vector($tmp);
+			return $res;
+		}
 
 	}
 ?>
