@@ -24,12 +24,12 @@
 				$this->blue = $colors['blue'];
 			}
 			if (self::$verbose == true)
-				printf("Color( red: %3d, green: %3d, blue: %3d ) constructed\n",
+				printf("Color( red: %3d, green: %3d, blue: %3d ) constructed.\n",
 							$this->red, $this->green, $this->blue);
 		}
 		function __destruct(){
 			if (self::$verbose == true)
-				printf("Color( red: %3d, green: %3d, blue: %3d ) destructed\n",
+				printf("Color( red: %3d, green: %3d, blue: %3d ) destructed.\n",
 							$this->red, $this->green, $this->blue);
 		}
 		function __toString():string{
@@ -54,7 +54,7 @@
 			$res = new Color($new);
 			return $res;
 		}
-		function mult(int $mult):Color{
+		function mult($mult):Color{
 			$new['red'] = $this->red * $mult;
 			$new['green'] = $this->green * $mult;
 			$new['blue'] = $this->blue * $mult;
