@@ -8,14 +8,13 @@
 /* ************************************************************************** */
 
 
-require_once '../ex01/Vertex.class.php';
-require_once '../ex02/Vector.class.php';
+require_once 'Vertex.class.php';
+require_once 'Vector.class.php';
 
 
 Vertex::$verbose = False;
 
 print( Vector::doc() );
-
 Vector::$verbose = True;
 
 

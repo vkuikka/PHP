@@ -1,6 +1,6 @@
 <?php
 
-require_once '../ex00/Color.class.php';
+require_once 'Color.class.php';
 
 
 print( Color::doc() );

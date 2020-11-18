@@ -8,9 +8,9 @@
 /* ************************************************************************** */
 
 
-require_once '../ex01/Vertex.class.php';
-require_once '../ex02/Vector.class.php';
-require_once '../ex03/Matrix.class.php';
+require_once 'Vertex.class.php';
+require_once 'Vector.class.php';
+require_once 'Matrix.class.php';
 
 
 Vertex::$verbose = False;
@@ -53,7 +53,6 @@ $P = new Matrix( array( 'preset' => Matrix::PROJECTION,
 						'near' => 1.0,
 						'far' => -50.0 ) );
 print( $P . PHP_EOL . PHP_EOL );
-return ;
 
 print( 'Matrices are so awesome, that they can be combined !' . PHP_EOL );
 print( 'This is a model matrix that scales, then rotates around OY axis,' . PHP_EOL );
