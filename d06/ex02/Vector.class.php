@@ -1,57 +1,55 @@
 <?php
-	require_once '../ex01/Vertex.class.php';
+	require_once 'Vertex.class.php';
 
 	class Vector {
-		private $__x;
-		private $__y;
-		private $__z;
-		private $__w = 0.0;
+		private $_x;
+		private $_y;
+		private $_z;
+		private $_w = 1.0;
 
 		static $verbose = false;
 
-		public function getX(){return $this->__x;}
-		public function getY(){return $this->__y;}
-		public function getZ(){return $this->__z;}
-		public function getW(){return $this->__w;}
+		public function getX(){return $this->_x;}
+		public function getY(){return $this->_y;}
+		public function getZ(){return $this->_z;}
+		public function getW(){return $this->_w;}
 
-		function __construct(array $vector){
-			if (!isset($vector['dest']))
+		function __construct(array $arr){
+			if (!isset($arr['dest']))
 			{
 				echo "ERROR give 'dest' vertex for vector. Following was given:\n";
-				var_dump($vector);
+				var_dump($arr);
 				exit;
 			}
-			if (!isset($vector['orig']))
-				$vector['orig'] = new Vertex(array('x' => 0.0, 'y' => 0.0, 'z' => 0.0, 'w' => 0.0));
+			if (!isset($arr['orig']))
+				$arr['orig'] = new Vertex(array('x' => 0.0, 'y' => 0.0, 'z' => 0.0));
 
-			$this->__x = $vector['dest']->x - $vector['orig']->x;
-			$this->__y = $vector['dest']->y - $vector['orig']->y;
-			$this->__z = $vector['dest']->z - $vector['orig']->z;
-			if (isset($vector['dest']->w))
-				$this->__w = $vector['dest']->w - $vector['orig']->w;
-
-
+			$this->_x = $arr['dest']->getX() - $arr['orig']->getX();
+			$this->_y = $arr['dest']->getY() - $arr['orig']->getY();
+			$this->_z = $arr['dest']->getZ() - $arr['orig']->getZ();
+			if (($arr['dest']->getW()) !== NULL)
+				$this->_w = $arr['dest']->getW() - $arr['orig']->getW();
 			if (self::$verbose == true)
 			{
-				printf("Vector( x: %.2f, y: %.2f, z: %.2f, w: %.2f ) constructed" . PHP_EOL,
-					$this->__x, $this->__y, $this->__z, $this->__w);
+				printf("Vector( x:%.2f, y:%.2f, z:%.2f, w:%.2f ) constructed" . PHP_EOL,
+					$this->_x, $this->_y, $this->_z, $this->_w);
 			}
 		}
 		function __toString():string{
-			$str = sprintf("Vector( x: %.2f, y: %.2f, z: %.2f, w: %.2f",
-					$this->__x, $this->__y, $this->__z, $this->__w);
+			$str = sprintf("Vector( x:%.2f, y:%.2f, z:%.2f, w:%.2f",
+					$this->_x, $this->_y, $this->_z, $this->_w);
 			if (self::$verbose === true && isset($this->col))
-				$str = $str.", ".$this->col;
+				$str = $str.", ".$this->_col;
 			$str .= " )";
 			return $str;
 		}
 		function __destruct(){
 			if (self::$verbose == true)
 			{
-				printf("Vector( x: %.2f, y: %.2f, z: %.2f, w: %.2f",
-						$this->__x, $this->__y, $this->__z, $this->__w);
-				if (isset($this->col))
-					print ", ".$this->col;
+				printf("Vector( x:%.2f, y:%.2f, z:%.2f, w:%.2f",
+						$this->_x, $this->_y, $this->_z, $this->_w);
+				if (isset($this->_col))
+					print ", ".$this->_col;
 				print " ) destructed\n";
 			}
 		}
@@ -60,31 +58,31 @@
 				echo file_get_contents("Vector.doc.txt");
 		}
 		function magnitude():float{
-			return (sqrt($this->getX()**2 + $this->getY()**2 + $this->getZ()**2));
+			return (sqrt($this->_x**2 + $this->_y**2 + $this->_z**2));
 		}
 
 		function normalize():Vector{
 			$mag = $this->magnitude();
-			$x = $this->__x / $mag;
-			$y = $this->__y / $mag;
-			$z = $this->__z / $mag;
+			$x = $this->_x / $mag;
+			$y = $this->_y / $mag;
+			$z = $this->_z / $mag;
 			$new = new Vertex(array('x' => $x, 'y' => $y, 'z' => $z));
 			$new = new Vector(array('dest' => $new));
 			return ($new);
 		}
 
 		function add(Vector $other):Vector{
-			$x = $this->__x + $other->getX();
-			$y = $this->__y + $other->getY();
-			$z = $this->__z + $other->getZ();
+			$x = $this->_x + $other->getX();
+			$y = $this->_y + $other->getY();
+			$z = $this->_z + $other->getZ();
 			$new = new Vertex(array('x' => $x, 'y' => $y, 'z' => $z));
 			$new = new Vector(array('dest' => $new));
 			return $new;
 		}
 		function sub(Vector $other):Vector{
-			$x = $this->__x - $other->getX();
-			$y = $this->__y - $other->getY();
-			$z = $this->__z - $other->getZ();
+			$x = $this->_x - $other->getX();
+			$y = $this->_y - $other->getY();
+			$z = $this->_z - $other->getZ();
 			$new = new Vertex(array('x' => $x, 'y' => $y, 'z' => $z));
 			$new = new Vector(array('dest' => $new));
 			return $new;
