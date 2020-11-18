@@ -122,13 +122,7 @@ w | ".sprintf("%.2f", $m[0][3])." | ".sprintf("%.2f", $m[1][3])." | ".sprintf("%
 		}
 		function __destruct(){
 			if (self::$verbose == true)
-			{
-				// printf("Vector( x: %.2f, y: %.2f, z: %.2f, w: %.2f",
-				// 		$this->__x, $this->__y, $this->__z, $this->__w);
-				// if (isset($this->col))
-				// 	print ", ".$this->col;
-				print " ) destructed\n";
-			}
+				print "Matrix instance destructed\n";
 		}
 		static function doc(){
 			if (file_exists("Vector.doc.txt"))
@@ -152,19 +146,20 @@ w | ".sprintf("%.2f", $m[0][3])." | ".sprintf("%.2f", $m[1][3])." | ".sprintf("%
 			return $res;
 		}
 		function transformVertex(Vertex $vtx):Vertex{
-			$tmp = array();
 			$m = $this->matrix;
 			$vx = $vtx->getX();
-			$vy = $vty->getY();
-			$vz = $vtz->getZ();
-			$vw = $vtz->getW();
-			$tmp['x'] = ($vx * $m[0][0]) + ($vy * $m[0][1]) + ($vz * $m[0][2]) + ($vw * $m[0][3]);
-			$tmp['y'] = ($vx * $m[1][0]) + ($vy * $m[1][1]) + ($vz * $m[1][2]) + ($vw * $m[1][3]);
-			$tmp['z'] = ($vx * $m[2][0]) + ($vy * $m[2][1]) + ($vz * $m[2][2]) + ($vw * $m[2][3]);
-			$tmp['w'] = ($vx * $m[3][0]) + ($vy * $m[3][1]) + ($vz * $m[3][2]) + ($vw * $m[3][3]);
-            $res = new Vector($tmp);
+			$vy = $vtx->getY();
+			$vz = $vtx->getZ();
+			$vw = $vtx->getW();
+			if ($vw == NULL)
+				$vw = 1;
+			$tmp = array();
+			$tmp['x'] = ($vx * $m[0][0]) + ($vy * $m[1][0]) + ($vz * $m[2][0]) + ($vw * $m[3][0]);
+			$tmp['y'] = ($vx * $m[0][1]) + ($vy * $m[1][1]) + ($vz * $m[2][1]) + ($vw * $m[3][1]);
+			$tmp['z'] = ($vx * $m[0][2]) + ($vy * $m[1][2]) + ($vz * $m[2][2]) + ($vw * $m[3][2]);
+			$tmp['w'] = ($vx * $m[0][3]) + ($vy * $m[1][3]) + ($vz * $m[2][3]) + ($vw * $m[3][3]);
+			$res = new Vertex($tmp);
 			return $res;
 		}
-
 	}
 ?>
