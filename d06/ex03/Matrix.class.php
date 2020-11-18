@@ -20,26 +20,6 @@
 		public function getvZ(){return $this->__vtcZ;}
 
 		function __construct(array $arr){
-			// if ((isset($vector['preset']) == SCALE &&
-			// 	!isset($vector['scale'])) ||
-
-			// 	((isset($vector['preset']) == RX ||
-			// 	isset($vector['preset']) == RY ||
-			// 	isset($vector['preset']) == RZ) &&
-			// 	!isset($vector['angle'])) ||
-
-			// 	((isset($vector['preset']) == TRANSLATION) &&
-			// 	!isset($vector['vtc'])) ||
-
-			// 	((isset($vector['preset']) == PROJECTION) &&
-			// 	(!isset($vector['fov']) ||
-			// 	!isset($vector['ratio']) ||
-			// 	!isset($vector['near']) ||
-			// 	!isset($vector['far']))))
-			// {
-			// 	echo "ERROR";
-			// 	exit;
-			// }
 			if ($arr['preset'] == self::IDENTITY)
 			{
 				$this->matrix[0] = [1, 0, 0, 0];
@@ -93,7 +73,7 @@
 				$this->matrix[0] = [1,	0,	0,	0];
 				$this->matrix[1] = [0,	1,	0,	0];
 				$this->matrix[2] = [0,	0,	1,	0];
-				$this->matrix[3] = [$v->getX(),	$v->getY(),	$v->getZ(),	$v->getW()];
+				$this->matrix[3] = [$v->getX(),	$v->getY(),	$v->getZ(),	1];
 				echo "Matrix TRANSLATION preset instance constructed\n";
 			}
 			if ($arr['preset'] == self::PROJECTION && isset($arr['ratio']))
