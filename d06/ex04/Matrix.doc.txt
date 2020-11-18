@@ -1,0 +1,43 @@
+
+<- Matrix ----------------------------------------------------------------------
+The Matrix class handles a 4x4 matrix.
+
+The Class’ constructor is expecting an array.
+The corresponding keys are required for specific presets:
+	’preset’: Always mandatory. The matrix type to produce.
+		The value must be one of the class constants mentioned below.
+
+	’scale’: the scale factor
+		mandatory when 'preset' is SCALE.
+
+	’angle’: the rotation angle in radians
+		mandatory when 'preset' is worth RX, RY or RZ.
+
+	’vtc’: translation vector
+		mandatory when 'preset' is TRANSLATION.
+
+	’fov’: projection field of view in degrees
+		mandatory when 'preset' is PROJECTION.
+	’ratio’: projected image ratio
+		mandatory when 'preset' is PROJECTION.
+	’near’: projection’s near clipping plane
+		mandatory when 'preset' is PROJECTION.
+	’far’: projection’s far clipping plane
+		mandatory when 'preset' is PROJECTION.
+
+Constants:
+		IDENTITY, SCALE, RX, RY, RZ, TRANSLATION, PROJECTION.
+
+Example syntax:
+	new Matrix(array('preset' => Matrix::TRANSLATION, 'vtc' => $vtc));
+
+Given preset constant corresponds to the kind if array created.
+IDENTITY creates an identity matrix
+SCALE creates a scaler matrix
+RX creates a rotation matrix on the x axis
+RY creates a rotation matrix on the y axis
+RZ creates a rotation matrix on the z axis
+TRANSLATION creates a translation matrix
+PROJECTION creates a projection matrix
+
+---------------------------------------------------------------------- Vertex ->
