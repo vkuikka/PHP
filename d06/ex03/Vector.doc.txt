@@ -1,20 +1,30 @@
 
-<- Vertex ----------------------------------------------------------------------
-The Vertex class handles homogenous 3d coordinates.
+<- Vector ----------------------------------------------------------------------
+The Vector class handles a homogenous 3d vector.
 
-An instance can be constructed from x, y and z coordinates:
-new Vertex( array( 'x' => 1.0, 'y' => 0.0, 'z' => 0.0) );
+An instance can be constructed from a vertex by giving it a destination:
+new Vector(array('dest' => $Your_vertex));
 
-If w value is not given in the array like above, the default value will be 1.0;
+Or by giving a destination AND an origin vertex
+new Vector(array('dest' => $Your_dest_vertex, 'orig' => $You_orig_vertex));
 
-A Color object can also be given to change the color of the vertex:
-$color = new Color( array( 'red' => 123, 'green' => 123, 'blue' => 123 ) );
-new Vertex( array( 'x' => 1.0, 'y' => 2.0, 'z' => 3.0), 'color' => $color ));
+If orig value is not given in the array like above,
+the default values will be 0 for all except w value will be 1.
 
-See Color.doc.txt to get information for Color object.
-
-No checks are done for values.
-All x, y and z must be passed for the vertex to be created.
-Any other use is undefined behaviour.
+The class has 10 functions:
+	magnitude(): returns the vector’s length (or ”norm”).
+	normalize(): returns a normalized version of the vector.
+		If the vector is already normalized, returns a fresh copy of
+		the vector.
+	add(Vector): returns the sum vector of both vectors.
+	sub(Vector): returns the difference vector of both vectors.
+	opposite(): returns the opposite vector.
+	scalarProduct(int) : returns the multiplication of the
+		vector with a given scalar.
+	dotProduct(Vector): returns the dot product of the vectors as float.
+	float cos(Vector) : returns the cosine of the angle
+		between both vectors.
+	crossProduct(Vector $rhs) : returns the cross product of the
+		vectors (right-hand mark!)
 
 ---------------------------------------------------------------------- Vertex ->
