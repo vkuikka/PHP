@@ -13,7 +13,7 @@
 		public function getY(){return $this->_y;}
 		public function getZ(){return $this->_z;}
 		public function getW(){return $this->_w;}
-
+		public function setW($new){$this->_w = $new;}
 		function __construct(array $arr){
 			if (!isset($arr['dest']))
 			{
