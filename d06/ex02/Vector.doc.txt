@@ -11,4 +11,20 @@ new Vector(array('dest' => $Your_dest_vertex, 'orig' => $You_orig_vertex));
 If orig value is not given in the array like above,
 the default values will be 0 for all except w value will be 1.
 
+The class has 10 functions:
+	magnitude(): returns the vector’s length (or ”norm”).
+	normalize(): returns a normalized version of the vector.
+		If the vector is already normalized, returns a fresh copy of
+		the vector.
+	add(Vector): returns the sum vector of both vectors.
+	sub(Vector): returns the difference vector of both vectors.
+	opposite(): returns the opposite vector.
+	scalarProduct(int) : returns the multiplication of the
+		vector with a given scalar.
+	dotProduct(Vector): returns the dot product of the vectors as float.
+	float cos(Vector) : returns the cosine of the angle
+		between both vectors.
+	crossProduct(Vector $rhs) : returns the cross product of the
+		vectors (right-hand mark!)
+
 ---------------------------------------------------------------------- Vertex ->
