@@ -22,8 +22,7 @@
 				exit;
 			}
 			if (!isset($arr['orig']))
-				$arr['orig'] = new Vertex(array('x' => 0.0, 'y' => 0.0, 'z' => 0.0));
-
+				$arr['orig'] = new Vertex(array('x' => 0.0, 'y' => 0.0, 'z' => 0.0, 'w' => 0.0));
 			$this->_x = $arr['dest']->getX() - $arr['orig']->getX();
 			$this->_y = $arr['dest']->getY() - $arr['orig']->getY();
 			$this->_z = $arr['dest']->getZ() - $arr['orig']->getZ();
