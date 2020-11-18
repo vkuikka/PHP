@@ -12,7 +12,6 @@
 		public function getX(){return $this->__x;}
 		public function getY(){return $this->__y;}
 		public function getZ(){return $this->__z;}
-
 		public function getW(){return $this->__w;}
 
 		function __construct(array $vector){
@@ -23,11 +22,13 @@
 				exit;
 			}
 			if (!isset($vector['orig']))
-				$vector['orig'] = new Vertex(array('x' => 0.0, 'y' => 0.0, 'z' => 0.0));
+				$vector['orig'] = new Vertex(array('x' => 0.0, 'y' => 0.0, 'z' => 0.0, 'w' => 0.0));
 
 			$this->__x = $vector['dest']->x - $vector['orig']->x;
 			$this->__y = $vector['dest']->y - $vector['orig']->y;
 			$this->__z = $vector['dest']->z - $vector['orig']->z;
+			if (isset($vector['dest']->w))
+				$this->__w = $vector['dest']->w - $vector['orig']->w;
 
 
 			if (self::$verbose == true)

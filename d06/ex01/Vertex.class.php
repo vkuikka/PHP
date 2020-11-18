@@ -6,7 +6,7 @@
 		public $y;
 		public $z;
 		public $col;
-		public $w = 1;
+		public $w = 1.0;
 
 		static $verbose = false;
 
@@ -20,6 +20,7 @@
 				$this->col = $vertex['color'];
 			else
 				$this->col = new Color( array('red' => 255, 'green' => 255, 'blue' => 255));
+
 			if (isset($vertex['x']) &&
 				isset($vertex['y']) &&
 				isset($vertex['z']))
@@ -27,6 +28,8 @@
 				$this->x = $vertex['x'];
 				$this->y = $vertex['y'];
 				$this->z = $vertex['z'];
+				if (isset($vertex['w']))
+					$this->w = $vertex['w'];
 			}
 			if (self::$verbose == true)
 			{

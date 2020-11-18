@@ -10,6 +10,8 @@
 		const RZ = "RZ";
 		const TRANSLATION = "TR";
 		const PROJECTION = "PR";
+		const FOV = 90;
+		const ASP = 16;
 
 		private $__vtcX;
 		private $__vtcY;
@@ -72,9 +74,9 @@
 			{
 				$vx['dest'] = new Vertex(array('x' => 1, 'y' => 0, 'z' => 0, 'w' => 0));
 				$this->__vtcX = new Vector($vx);
-				$vy['dest'] = new Vertex(array('x' => cos($arr['angle']), 'y' => -sin($arr['angle']), 'z' => 0, 'w' => 0));
+				$vy['dest'] = new Vertex(array('x' => 0, 'y' => cos($arr['angle']), 'z' => sin($arr['angle']), 'w' => 0));
 				$this->__vtcY = new Vector($vy);
-				$vz['dest'] = new Vertex(array('x' => sin($arr['angle']), 'y' => cos($arr['angle']), 'z' => 0, 'w' => 0));
+				$vz['dest'] = new Vertex(array('x' => 0, 'y' => -sin($arr['angle']), 'z' => cos($arr['angle']), 'w' => 0));
 				$this->__vtcZ = new Vector($vz);
 				$v0['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 0, 'w' => 1));
 				$this->__vtx0 = new Vector($v0);
@@ -82,11 +84,11 @@
 			}
 			if ($arr['preset'] == self::RY && isset($arr['angle']))
 			{
-				$vx['dest'] = new Vertex(array('x' => cos($arr['angle']), 'y' => 0, 'z' => sin($arr['angle']), 'w' => 0));
+				$vx['dest'] = new Vertex(array('x' => cos($arr['angle']), 'y' => 0, 'z' => -sin($arr['angle']), 'w' => 0));
 				$this->__vtcX = new Vector($vx);
 				$vy['dest'] = new Vertex(array('x' => 0, 'y' => 1, 'z' => 0, 'w' => 0));
 				$this->__vtcY = new Vector($vy);
-				$vz['dest'] = new Vertex(array('x' => -sin($arr['angle']), 'y' => 0, 'z' => cos($arr['angle']), 'w' => 0));
+				$vz['dest'] = new Vertex(array('x' => sin($arr['angle']), 'y' => 0, 'z' => cos($arr['angle']), 'w' => 0));
 				$this->__vtcZ = new Vector($vz);
 				$v0['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 0, 'w' => 1));
 				$this->__vtx0 = new Vector($v0);
@@ -94,9 +96,9 @@
 			}
 			if ($arr['preset'] == self::RZ && isset($arr['angle']))
 			{
-				$vx['dest'] = new Vertex(array('x' => cos($arr['angle']), 'y' => -sin($arr['angle']), 'z' => 0, 'w' => 0));
+				$vx['dest'] = new Vertex(array('x' => cos($arr['angle']), 'y' => sin($arr['angle']), 'z' => 0, 'w' => 0));
 				$this->__vtcX = new Vector($vx);
-				$vy['dest'] = new Vertex(array('x' => sin($arr['angle']), 'y' => cos($arr['angle']), 'z' => 0, 'w' => 0));
+				$vy['dest'] = new Vertex(array('x' => -sin($arr['angle']), 'y' => cos($arr['angle']), 'z' => 0, 'w' => 0));
 				$this->__vtcY = new Vector($vy);
 				$vz['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 1, 'w' => 0));
 				$this->__vtcZ = new Vector($vz);
@@ -107,16 +109,56 @@
 			if ($arr['preset'] == self::TRANSLATION && isset($arr['vtc']))
 			{
 				$vtc = $arr['vtc'];
-				$vx['dest'] = new Vertex(array('x' => 1, 'y' => 0, 'z' => 0, 'w' => $vtc->getX()));
+				// $vx['dest'] = new Vertex(array('x' => 1, 'y' => 0, 'z' => 0, 'w' => $vtc->getX()));
+				// $this->__vtcX = new Vector($vx);
+				// $vy['dest'] = new Vertex(array('x' => 0, 'y' => 1, 'z' => 0, 'w' => $vtc->getY()));
+				// $this->__vtcY = new Vector($vy);
+				// $vz['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 1, 'w' => $vtc->getZ()));
+				// $this->__vtcZ = new Vector($vz);
+				// $v0['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 0, 'w' => $vtc->getW()));
+				// $this->__vtx0 = new Vector($v0);
+
+				$vx['dest'] = new Vertex(array('x' => 1, 'y' => 0, 'z' => 0, 'w' => 0));
 				$this->__vtcX = new Vector($vx);
-				$vy['dest'] = new Vertex(array('x' => 0, 'y' => 1, 'z' => 0, 'w' => $vtc->getY()));
+				$vy['dest'] = new Vertex(array('x' => 0, 'y' => 1, 'z' => 0, 'w' => 0));
 				$this->__vtcY = new Vector($vy);
-				$vz['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 1, 'w' => $vtc->getZ()));
+				$vz['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 1, 'w' => 0));
 				$this->__vtcZ = new Vector($vz);
-				$v0['dest'] = new Vertex(array('x' => 0, 'y' => 0, 'z' => 0, 'w' => $vtc->getW()));
+				$v0['dest'] = new Vertex(array('x' => $vtc->getX(), 'y' => $vtc->getY(), 'z' => $vtc->getZ(), 'w' => $vtc->getW()));
 				$this->__vtx0 = new Vector($v0);
 				echo "Matrix TRANSLATION instance constructed\n";
 			}
+			if ($arr['preset'] == self::PROJECTION && isset($arr['ratio']))
+			{
+
+			}
+		}
+		private function frustum($n){
+			$scale = tan(FOV * 0.5 * M_PI / 180) * $n;
+			$r = ASP * $scale;
+			$l = -$r;
+			$t = $scale;
+			$b = -$scale;
+
+		    M[0][0] = 2 * $n / ($r - $l); 
+			M[0][1] = 0; 
+			M[0][2] = 0; 
+			M[0][3] = 0; 
+		
+			M[1][0] = 0; 
+			M[1][1] = 2 * n / (t - b); 
+			M[1][2] = 0; 
+			M[1][3] = 0; 
+		
+			M[2][0] = (r + l) / (r - l); 
+			M[2][1] = (t + b) / (t - b); 
+			M[2][2] = -(f + n) / (f - n); 
+			M[2][3] = -1; 
+		
+			M[3][0] = 0; 
+			M[3][1] = 0; 
+			M[3][2] = -2 * f * n / (f - n); 
+			M[3][3] = 0; 	
 		}
 		function __toString():string{
 			$vx = $this->__vtcX;
