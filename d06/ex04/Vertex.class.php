@@ -59,30 +59,5 @@
 			if (file_exists("Vertex.doc.txt"))
 				return file_get_contents("Vertex.doc.txt");
 		}
-
-		function add(Color $other):Color{
-			$new['x'] = $this->_x + $other->_x;
-			$new['y'] = $this->_y + $other->_y;
-			$new['z'] = $this->_z + $other->_z;
-			$new['w'] = $this->_w + $other->_w;
-			$res = new Vertex($new);
-			return $res;
-		}
-		function sub(Color $other):Color{
-			$new['x'] = $this->_x - $other->_x;
-			$new['y'] = $this->_y - $other->_y;
-			$new['z'] = $this->_z - $other->_z;
-			$new['w'] = $this->_w - $other->_w;
-			$res = new Vertex($new);
-			return $res;
-		}
-		function mult(int $mult):Color{
-			$new['x'] = $this->_x * $mult;
-			$new['y'] = $this->_y * $mult;
-			$new['z'] = $this->_z * $mult;
-			$new['w'] = $this->_w * $mult;
-			$res = new Vertex($new);
-			return $res;
-		}
 	}
 ?>

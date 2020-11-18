@@ -11,33 +11,11 @@
 		const TRANSLATION = "TR";
 		const PROJECTION = "PR";
 
-		public $matrix = array();
+		private $matrix = array();
 
 		static $verbose = false;
 
-		public function getvX(){return $this->__vtcX;}
-		public function getvY(){return $this->__vtcY;}
-		public function getvZ(){return $this->__vtcZ;}
-
 		function __construct(array $arr){
-			// if ((isset($arr['preset']) == SCALE &&
-			// 	!isset($arr['scale'])) ||
-			// 	((isset($arr['preset']) == RX ||
-			// 	isset($arr['preset']) == RY ||
-			// 	isset($arr['preset']) == RZ) &&
-			// 	!isset($arr['angle'])) ||
-			// 	((isset($arr['preset']) == TRANSLATION) &&
-			// 	!isset($arr['vtc'])) ||
-			// 	((isset($arr['preset']) == PROJECTION) &&
-			// 	(!isset($arr['fov']) ||
-			// 	!isset($arr['ratio']) ||
-			// 	!isset($arr['near']) ||
-			// 	!isset($arr['far']))))
-			// {
-			// 	echo "ERROR: incorrect preset with values given\n";
-			// 	var_dump($arr);
-			// 	exit;
-			// }
 			if ($arr['preset'] == self::IDENTITY)
 			{
 				$this->matrix[0] = [1, 0, 0, 0];
@@ -121,9 +99,6 @@ w | ".sprintf("%.2f", $m[0][3])." | ".sprintf("%.2f", $m[1][3])." | ".sprintf("%
 		static function doc(){
 			if (file_exists("Vector.doc.txt"))
 				return file_get_contents("Vector.doc.txt");
-		}
-		function magnitude():float{
-			return (sqrt($this->getX()**2 + $this->getY()**2 + $this->getZ()**2));
 		}
 
 		function mult(Matrix $rhs):Matrix{

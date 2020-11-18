@@ -11,8 +11,6 @@ A Color object can also be given to change the color of the vertex:
 $color = new Color( array( 'red' => 123, 'green' => 123, 'blue' => 123 ) );
 new Vertex( array( 'x' => 1.0, 'y' => 2.0, 'z' => 3.0), 'color' => $color ));
 
-See Color.doc.txt to get information for Color object.
-
 No checks are done for values.
 All x, y and z must be passed for the vertex to be created.
 Any other use is undefined behaviour.

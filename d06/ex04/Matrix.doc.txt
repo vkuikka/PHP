@@ -32,12 +32,19 @@ Example syntax:
 	new Matrix(array('preset' => Matrix::TRANSLATION, 'vtc' => $vtc));
 
 Given preset constant corresponds to the kind if array created.
-IDENTITY creates an identity matrix
-SCALE creates a scaler matrix
-RX creates a rotation matrix on the x axis
-RY creates a rotation matrix on the y axis
-RZ creates a rotation matrix on the z axis
-TRANSLATION creates a translation matrix
-PROJECTION creates a projection matrix
+	IDENTITY creates an identity matrix
+	SCALE creates a scaler matrix
+	RX creates a rotation matrix on the x axis
+	RY creates a rotation matrix on the y axis
+	RZ creates a rotation matrix on the z axis
+	TRANSLATION creates a translation matrix
+	PROJECTION creates a projection matrix
+
+The class has 3 functions:
+	mult(Matrix): Multiplies given matrix with current one and returns a copy
+	transformVertex(Vertex): Transforms given vertex with current matrix
+		and returns a copy
+	rot(): Applies a diagonal rotation to x, y and z values of the matrix
+		and returns a copy
 
 ---------------------------------------------------------------------- Vertex ->
