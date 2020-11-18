@@ -2,25 +2,33 @@
 <- Camera ----------------------------------------------------------------------
 The Camera class handles matricies needed to start rendering image.
 
-An instance can be constructed from either a RGB value:
-new Color( array( 'rgb' => 12345 ) );
+An instance can be constructed in the following way:
 
-Or from distinct red, green, blue constitutives:
-new Color( array( 'red' => 255, 'green' => 255, 'blue' => 255 ) );
+new Camera(array('origin' => $vtxO,
+			   'orientation' => $R,
+			   'width' => 640,
+			   'height' => 480,
+			   'fov' => 60,
+			   'near' => 1.0,
+			   'far' => 100.0));
 
-Red, green, blue constitutives and RGB values are converted to intergers.
-Negative or > to 255 color constitutives are left as is.
-Any other use is undefined behaviour.
+Or by giving the aspect ratio instead of 'width' and 'height'.
+This is done by replacing the following: 
+	'width' => 640
+	'height' => 480
+with the following
+	'ratio' => 640/480
 
-The class provides the following methods :
+Negative values or values without width and height or ratio is undefined behaviour
 
-Color   add( Color $rhs );
-Adds each color constitutive and returns a new Color instance.
+Meaning for each value is listed below:
+	origin: the world origin as vertex
+	orientation: the camera orientation as an orientation matrix
+	width: width of screen in pixels as integer
+	height: height of screen in pixels as integer
+	ratio: aspect ratio of screen as integer
+	fov: field of view as integer angle
+	near: the near clipping point distance as float
+	far: the far clipping point distance as float
 
-Color   sub( Color $rhs );
-Substracts each color constitutive and returns a new Color instance.
-
-Color   mult( $f );
-Multiplies each color constitutive by factor $f and returns a new Color
-instance.
----------------------------------------------------------------------- Color ->
+---------------------------------------------------------------------- Camera ->
