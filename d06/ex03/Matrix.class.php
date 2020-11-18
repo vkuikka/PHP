@@ -15,10 +15,6 @@
 
 		static $verbose = false;
 
-		public function getvX(){return $this->__vtcX;}
-		public function getvY(){return $this->__vtcY;}
-		public function getvZ(){return $this->__vtcZ;}
-
 		function __construct(array $arr){
 			if ($arr['preset'] == self::IDENTITY)
 			{
@@ -103,9 +99,6 @@ w | ".sprintf("%.2f", $m[0][3])." | ".sprintf("%.2f", $m[1][3])." | ".sprintf("%
 		static function doc(){
 			if (file_exists("Vector.doc.txt"))
 				return file_get_contents("Vector.doc.txt");
-		}
-		function magnitude():float{
-			return (sqrt($this->getX()**2 + $this->getY()**2 + $this->getZ()**2));
 		}
 
 		function mult(Matrix $rhs):Matrix{
