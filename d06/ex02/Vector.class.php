@@ -17,7 +17,7 @@
 		function __construct(array $vector){
 			if (!isset($vector['dest']))
 			{
-				echo "ERROR give destination vertex for vector. Following was given:\n";
+				echo "ERROR give 'dest' vertex for vector. Following was given:\n";
 				var_dump($vector);
 				exit;
 			}
