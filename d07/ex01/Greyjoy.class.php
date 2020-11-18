@@ -1,5 +1,5 @@
 <?php
 class Greyjoy {
-	public $familyMotto = "We do not sow";
+	protected $familyMotto = "We do not sow";
 }
 ?>
