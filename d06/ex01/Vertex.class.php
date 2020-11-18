@@ -11,10 +11,10 @@
 		static $verbose = false;
 
 
-		public function getX(){return $this->$x;}
-		public function getY(){return $this->$y;}
-		public function getZ(){return $this->$z;}
-		public function getW(){return $this->$w;}
+		public function getX(){return $this->x;}
+		public function getY(){return $this->y;}
+		public function getZ(){return $this->z;}
+		public function getW(){return $this->w;}
 		function __construct(array $vertex){
 			if (isset($vertex['color']))
 				$this->col = $vertex['color'];
@@ -30,6 +30,8 @@
 				$this->z = $vertex['z'];
 				if (isset($vertex['w']))
 					$this->w = $vertex['w'];
+				else
+					$this->w = 1.0;
 			}
 			if (self::$verbose == true)
 			{
