@@ -1,6 +1,6 @@
 <?php
-	require_once '../ex01/Vertex.class.php';
-	require_once '../ex02/Vector.class.php';
+	require_once 'Vertex.class.php';
+	require_once 'Vector.class.php';
 
 	class Matrix {
 		const IDENTITY = "ID";
@@ -55,7 +55,7 @@
 				$this->matrix[1] = [0,	$s,	0,	0];
 				$this->matrix[2] = [0,	0,	$s,	0];
 				$this->matrix[3] = [0,	0,	0,	1];
-				echo "Matrix SCALE instance constructed\n";
+				echo "Matrix SCALE preset instance constructed\n";
 			}
 			if ($arr['preset'] == self::RX && isset($arr['angle']))
 			{
@@ -65,7 +65,7 @@
 				$this->matrix[1] = [0,	$c,	$s,	0];
 				$this->matrix[2] = [0,	-$s,$c,	0];
 				$this->matrix[3] = [0,	0,	0,	1];
-				echo "Matrix Ox ROTATION instance constructed\n";
+				echo "Matrix Ox ROTATION preset instance constructed\n";
 			}
 			if ($arr['preset'] == self::RY && isset($arr['angle']))
 			{
@@ -75,7 +75,7 @@
 				$this->matrix[1] = [0,	1,	0,	0];
 				$this->matrix[2] = [$s,	0,	$c,	0];
 				$this->matrix[3] = [0,	0,	0,	1];
-				echo "Matrix Oy ROTATION instance constructed\n";
+				echo "Matrix Oy ROTATION preset instance constructed\n";
 			}
 			if ($arr['preset'] == self::RZ && isset($arr['angle']))
 			{
@@ -85,7 +85,7 @@
 				$this->matrix[1] = [-$s,$c,	0,	0];
 				$this->matrix[2] = [0,	0,	1,	0];
 				$this->matrix[3] = [0,	0,	0,	1];
-				echo "Matrix Oz ROTATION instance constructed\n";
+				echo "Matrix Oz ROTATION preset instance constructed\n";
 			}
 			if ($arr['preset'] == self::TRANSLATION && isset($arr['vtc']))
 			{
@@ -94,11 +94,7 @@
 				$this->matrix[1] = [0,	1,	0,	0];
 				$this->matrix[2] = [0,	0,	1,	0];
 				$this->matrix[3] = [$v->getX(),	$v->getY(),	$v->getZ(),	$v->getW()];
-				// $this->matrix[0] = [1,	0,	0,	$v->getX()];
-				// $this->matrix[1] = [0,	1,	0,	$v->getY()];
-				// $this->matrix[2] = [0,	0,	1,	$v->getZ()];
-				// $this->matrix[3] = [0,	0,	0,	$v->getW()];
-				echo "Matrix TRANSLATION instance constructed\n";
+				echo "Matrix TRANSLATION preset instance constructed\n";
 			}
 			if ($arr['preset'] == self::PROJECTION && isset($arr['ratio']))
 			{
@@ -108,7 +104,7 @@
 				$this->matrix[2][3] = -1;
 				$this->matrix[3][2] = (2 * (float)$arr['near'] * (float)$arr['far']) / (float)($arr['near'] - (float)$arr['far']);
 				$this->matrix[3][3] = 0;
-				echo "Matrix PROJECTION instance constructed\n";
+				echo "Matrix PROJECTION preset instance constructed\n";
 			}
 		}
 		function __toString():string{
