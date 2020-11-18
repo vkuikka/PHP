@@ -40,7 +40,7 @@ Given preset constant corresponds to the kind if array created.
 	TRANSLATION creates a translation matrix
 	PROJECTION creates a projection matrix
 
-The class has 3 functions:
+The class has 2 functions:
 	mult(Matrix): Multiplies given matrix with current one and returns a copy
 	transformVertex(Vertex): Transforms given vertex with current matrix
 		and returns a copy
