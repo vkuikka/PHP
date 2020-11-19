@@ -1,24 +1,16 @@
 <?php
-class Lannister {
-}
-class Jaime extends Lannister {
-	public function sleepWith($in) {
-	if (get_class($in) == 'Tyrion')
-		echo "Not even if i'm drunk !\n";
-	if (get_class($in) == 'Sansa')
-		echo "let's do this.\n";
-	if (get_class($in) == 'Cersei')
-		echo "With pleasure, but only in a tower in Winterfell, then.\n";
+require_once 'IFighter.class.php';
+
+class NightsWatch implements IFighter {
+	private $fighters = array();
+
+	public function fight() {
+		foreach($this->fighters as $f)
+			if (get_class($f) != 'MaesterAemon')
+				$f->fight();
 	}
-}
-class Tyrion extends Lannister {
-	public function sleepWith($in) {
-	if (get_class($in) == 'Jaime')
-		echo "Not even if i'm drunk !\n";
-	if (get_class($in) == 'Sansa')
-		echo "let's do this.\n";
-	if (get_class($in) == 'Cersei')
-		echo "Not even if i'm drunk !\n";
+	public function recruit($new) {
+		$this->fighters[] = $new;
 	}
 }
 ?>
