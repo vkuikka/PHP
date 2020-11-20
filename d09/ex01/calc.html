@@ -1,0 +1,61 @@
+<html>
+	<head>
+		<script>
+			function numValid(num1, num2) {
+				return	num1 == parseInt(num1, 10) && num1 >= 0 &&
+						num2 == parseInt(num2, 10) && num2 >= 0;
+			}
+			function asd(){
+				if (!numValid(val1.value, val2.value))
+					return;
+				var l = Number(val1.value);
+				var r = Number(val2.value);
+				var res = "Error :(";
+				switch (op.value){
+					case ('+'):
+						res = (l + r);
+						break;
+					case ('-'):
+						res = (l - r);
+						break;
+					case ('*'):
+						res = (l * r);
+						break;
+					case ('/'):
+						if (r == 0)
+							res = "It's over 9000!";
+						else
+							res = (l / r);
+						break;
+					case ('%'):
+						if (r == 0)
+							res = "It's over 9000!";
+						else
+							res = (l % r);
+						break;
+				}
+				alert(res);
+				console.log(res)
+			}
+		</script>
+	</head>
+	<body>
+	<form method="POST" id='form'>
+		<input type="text" id="val1" value="">
+		<select id="op">
+			<option value="+">+</option>
+			<option value="-">-</option>
+			<option value="*">*</option>
+			<option value="/">/</option>
+			<option value="%">%</option>
+		  </select>
+		<input type="text" id="val2" value="">
+		<input type="button" value="Try me!" onclick="asd()"/>
+		<script>
+			setInterval(function(){ alert('Please, use me...'); }, 30000);
+		</script>
+	</form>
+	<script>
+	</script>
+	</body>
+</html>

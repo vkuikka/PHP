@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			function setstyle(input, b) {
+				if (typeof(this.state) == 'undefined')
+					this.state = 'none';
+				if (input == 'in')
+					this.state = 'in';
+				else if (input == 'out')
+					this.state = 'out';
+				
+				if (typeof(this.noclick) == 'undefined')
+					this.noclick = 'none';
+				if (input == 'in')
+					this.noclick = true;
+				else if (input == 'click')
+					this.noclick = false;
+
+				if (typeof(this.size) == 'undefined')
+					this.size = 200;
+				if (input == 'click')
+					this.size += 10;
+				if (this.size > 420)
+					this.size = 200;
+				if (input == 'out' && this.noclick == true && this.size > 200)
+					this.size -= 5;
+
+				if (typeof(this.color) == 'undefined')
+					this.color = "red";
+				if (this.color == 'red')
+					this.color = 'green';
+				else if (this.color == 'green')
+					this.color = 'blue';
+				else if (this.color == 'blue')
+					this.color = 'red';
+
+				var sty = "background:" + color +
+						";width: " + this.size +
+						"px;height: " + this.size +
+						"px;border-radius:" + (this.size / 2) + "px;";
+				console.log(state);
+				b.setAttribute('style', sty);
+			}
+
+		</script>
+	</head>
+	<body>
+		<div id='balloon' style='width:200px;height:200px;background-color:red;border-radius:100px;'></div>
+		<script>
+			balloon.onmouseover = function() {
+				var b = document.getElementById('balloon');
+				console.log(b);
+				setstyle('in', b);
+			}
+			balloon.onmouseout = function() {
+				var b = document.getElementById('balloon');
+				setstyle('out', b);
+			}
+			balloon.onclick = function() {
+				var b = document.getElementById('balloon');
+				setstyle('click', b);
+			}
+		</script>
+	</body>
+</html>
