@@ -1,0 +1,21 @@
+#title	{
+	text-align:center;
+}
+
+#button {
+    -webkit-appearance: button;
+	-moz-appearance: button;
+    appearance: button;
+    /* text-decoration: none; */
+    color: black;
+}
+
+.form-box	{
+	background-color: lightgray;
+	border-radius: 20px;
+	margin:auto;
+	width: 600px;
+	padding-top: 25px;
+	padding-bottom: 15px;
+	text-align:center;
+}
